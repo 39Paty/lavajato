@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kanban Lava Jato</title>
+    <style>
+        .kanban { display: flex; }
+        .coluna {
+            width: 20%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+        }
+        .cartao {
+            background: #f1f1f1;
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Kanban Lava Jato</h1>
+<div class="kanban">
+    {% for nome, veiculos in etapas.items %}
+        <div class="coluna">
+            <h3>{{ nome|capfirst }}</h3>
+            {% for v in veiculos %}
+                <div class="cartao">
+                    <strong>{{ v.cliente }}</strong><br>
+                    {{ v.placa }}<br>
+                    {{ v.get_servico_display }}<br>
+                    <em>{{ v.chegada|date:"H:i" }}</em>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
