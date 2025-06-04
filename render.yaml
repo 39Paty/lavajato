@@ -3,11 +3,13 @@ services:
     name: lavajato
     env: python
     buildCommand: ""
-    startCommand: gunicorn lavajato.wsgi:application
+    startCommand: lavajato.wsgi:application
     envVars:
       - key: DATABASE_URL
         value: lavajato.settings
       - key: DJANGO_SETTINGS_MODULE
+        value: lavajato.settings
         generateValue: true
-      - key: ALLOWED_HOSTS
+      - key: PYTHON_VERSION
+        value: 3.11
         value: your-service-name.onrender.com
