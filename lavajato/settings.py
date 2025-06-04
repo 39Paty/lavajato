@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-7dg8+rh+e=2yn$lyi(dj8te&uep%6rcp7li1n@l3u+b*oh*k1%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+import os
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', '127.0.0.1')]
 
 
 # Application definition
@@ -74,7 +75,12 @@ WSGI_APPLICATION = 'lavajato.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+import django_heroku
+import dj_database_url
+
+DATABASES =  DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+django_heroku.settings(locals())
+{
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
